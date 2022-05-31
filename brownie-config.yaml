@@ -1,0 +1,44 @@
+dependencies:
+  - OpenZeppelin/openzeppelin-contracts@4.2.0
+  - smartcontractkit/chainlink@1.4.1
+compiler:
+  solc:
+    remappings:
+      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.2.0"
+      - "@chainlink=smartcontractkit/chainlink@1.4.1"
+networks:
+  development:
+    eth_usd_price_feed: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"
+    dai_usd_price_feed: "0x2bA49Aaa16E6afD2a993473cfB70Fa8559B523cF"
+    dai_eth_price_feed: "0x74825DbC8BF76CC4e9494d0ecB210f676Efa001D"
+    weth_token: "0xc778417E063141139Fce010982780140Aa0cD5Ab"
+    verify: False
+  ganache:
+    eth_usd_price_feed: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"
+    dai_usd_price_feed: "0x2bA49Aaa16E6afD2a993473cfB70Fa8559B523cF"
+    dai_eth_price_feed: "0x74825DbC8BF76CC4e9494d0ecB210f676Efa001D"
+    weth_token: "0xc778417E063141139Fce010982780140Aa0cD5Ab"
+    verify: False
+  rinkeby:
+    eth_usd_price_feed: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"
+    dai_usd_price_feed: "0x2bA49Aaa16E6afD2a993473cfB70Fa8559B523cF"
+    dai_eth_price_feed: "0x74825DbC8BF76CC4e9494d0ecB210f676Efa001D"
+    weth_token: "0xc778417E063141139Fce010982780140Aa0cD5Ab"
+    fau_token: "0xFab46E002BbF0b4509813474841E0716E6730136"
+    verify: True
+  kovan:
+    eth_usd_price_feed: "0x9326BFA02ADD2366b30bacB125260Af641031331"
+    dai_usd_price_feed: "0x777A68032a88E5A84678A77Af2CD65A7b3c0775a"
+    dai_eth_price_feed: "0x22B58f1EbEDfCA50feF632bD73368b2FdA96D541"
+    weth_token: "0xd0A1E359811322d97991E03f863a0C30C2cF029C"
+    fau_token: "0xFab46E002BbF0b4509813474841E0716E6730136"
+    verify: True
+  mainnet-fork:
+    eth_usd_price_feed: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+    dai_usd_price_feed: "0xeE636E1f7A0A846EEc2385E729CeA7D1b339D40D"
+    dai_eth_price_feed: "0x773616E4d11A78F511299002da57A0a94577F1f4"
+    weth_token: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    verify: True
+dotenv: .env
+wallet:
+  from_key: ${PRIVATE_KEY}
