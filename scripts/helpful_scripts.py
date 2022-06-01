@@ -2,14 +2,15 @@ from brownie import (
     network,
     accounts,
     config,
-    LinkToken,
     MockV3Aggregator,
-    MockOracle,
-    VRFCoordinatorV2Mock,
+    MockDAI,
+    MockWETH,
     Contract,
     web3,
 )
 import time
+
+INITIAL_PRICE_FEED_VALUE = 2000000000000000000000
 
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
@@ -24,10 +25,10 @@ BLOCK_CONFIRMATIONS_FOR_VERIFICATION = (
 )
 
 contract_to_mock = {
-    "link_token": LinkToken,
     "eth_usd_price_feed": MockV3Aggregator,
-    "vrf_coordinator": VRFCoordinatorV2Mock,
-    "oracle": MockOracle,
+    "dai_usd_price_feed": MockV3Aggregator,
+    "fau_token": MockDAI,
+    "weth_token": MockWETH,
 }
 
 DECIMALS = 18
@@ -100,27 +101,21 @@ def fund_with_link(
     return tx
 
 
-def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
+def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
     """
     Use this script if you want to deploy mocks to a testnet
     """
     print(f"The active network is {network.show_active()}")
     print("Deploying Mocks...")
     account = get_account()
-    print("Deploying Mock Link Token...")
-    link_token = LinkToken.deploy({"from": account})
     print("Deploying Mock Price Feed...")
     mock_price_feed = MockV3Aggregator.deploy(
         decimals, initial_value, {"from": account}
     )
     print(f"Deployed to {mock_price_feed.address}")
-    print("Deploying Mock VRFCoordinator...")
-    mock_vrf_coordinator = VRFCoordinatorV2Mock.deploy(
-        BASE_FEE, GAS_PRICE_LINK, {"from": account}
-    )
-    print(f"Deployed to {mock_vrf_coordinator.address}")
-
-    print("Deploying Mock Oracle...")
-    mock_oracle = MockOracle.deploy(link_token.address, {"from": account})
-    print(f"Deployed to {mock_oracle.address}")
-    print("Mocks Deployed!")
+    print(f"Deploying MockDAI...")
+    dai_token = MockDAI.deploy({"from": account})
+    print(f"Deployed to {dai_token.address}")
+    print(f"Deploying MockWETH...")
+    weth_token = MockWETH.deploy({"from": account})
+    print(f"Deployed to {weth_token.address}")
