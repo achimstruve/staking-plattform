@@ -1,5 +1,5 @@
 import React from 'react'
-import { DAppProvider, ChainId, Kovan, Rinkeby } from "@usedapp/core"
+import { DAppProvider, ChainId } from "@usedapp/core"
 import { Header } from "./components/Header"
 import { Container } from "@material-ui/core"
 import { Main } from "./components/Main"
